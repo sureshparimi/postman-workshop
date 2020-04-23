@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "f2f7d7b6-6873-4c31-8050-9963b7439ff1",
+		"name": "DDT_ADD_CONTATCS_COLLECTION",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Contact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "285270fe-508b-4cff-9037-ea42d28071e1",
+						"exec": [
+							"var firstname = JSON.stringify(pm.iterationData.get(\"firstname\"))",
+							"pm.environment.set(\"firstname\",firstname)",
+							"",
+							"var lastname = JSON.stringify(pm.iterationData.get(\"lastname\"))",
+							"pm.environment.set(\"lastname\",lastname)",
+							"",
+							"var email = JSON.stringify(pm.iterationData.get(\"email\"))",
+							"pm.environment.set(\"email\",email)",
+							"",
+							"var city = JSON.stringify(pm.iterationData.get(\"city\"))",
+							"pm.environment.set(\"city\",city)",
+							"",
+							"var country = JSON.stringify(pm.iterationData.get(\"country\"))",
+							"pm.environment.set(\"country\",country)",
+							"",
+							"var jobtitle = JSON.stringify(pm.iterationData.get(\"jobtitle\"))",
+							"pm.environment.set(\"jobtitle\",jobtitle)",
+							"",
+							"var company = JSON.stringify(pm.iterationData.get(\"company\"))",
+							"pm.environment.set(\"company\",company)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1cb9ee6-a7d6-4dec-8764-1492c82df95b",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"{{firstname}}\",\n        \"lastName\": \"{{lastname}}\",\n        \"email\": \"{{email}}\",\n        \"location\": {\n            \"city\": \"{{city}}\",\n            \"country\": \"{{country}}\"\n        },\n        \"employer\": {\n            \"jobTitle\": \"{{jobtitle}}\",\n            \"company\": \"{{company}}\"\n        }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "3.13.86.142:3000/contacts",
+					"host": [
+						"3",
+						"13",
+						"86",
+						"142"
+					],
+					"port": "3000",
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
